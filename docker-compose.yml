@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+    client:
+        stdin_open: true
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - 4444:4444
+        volumes:
+            - "/app/node_modules"
+            - "./:/app"
+          
+          
+          
