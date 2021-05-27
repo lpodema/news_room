@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Search from "../containers/searchMenu";
 import routes from "../components/routes";
-const Header = () => {
+const Header = (props) => {
+    // console.log(props);
     return (
         <ul>
             {routes.map((route) => (
                 <li key={route.path}>
-                    <Link to={route.path}>{route.path}</Link>
+                    <Link to={`/${route.path}`}>{route.path}</Link>
                 </li>
             ))}
             {/* <li>
@@ -29,7 +30,7 @@ const Header = () => {
                 <Link to='/deportes'>deportes</Link>
             </li> */}
             <li>
-                <Search />
+                <Search handleChangeInput={props.handleChangeInput} />
             </li>
         </ul>
     );

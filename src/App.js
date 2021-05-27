@@ -1,4 +1,5 @@
 import "./App.css";
+import { Component } from "react";
 import Header from "./components/header";
 import Articles from "./containers/mainContainer";
 import routes from "./components/routes";
@@ -17,6 +18,12 @@ function App() {
                         children={<Articles url={route.routing} />}
                     />
                 ))}
+                <Route
+                    path='/search/:term'
+                    render={(props) => (
+                        <Articles term={props.match.params.term} />
+                    )}
+                />
             </Switch>
         </div>
     );

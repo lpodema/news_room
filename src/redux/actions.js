@@ -4,6 +4,7 @@ import {
     LOADING_IN_PROGRESS,
     LOADING_SUCCESS,
     CLEAR_NEWS,
+    UPDATE_NEWS,
 } from "../redux/actionTypes";
 
 export const loadingError = (bool) => ({
@@ -25,8 +26,13 @@ export const clearNews = () => ({
     type: CLEAR_NEWS,
 });
 
+export const searchTerm = (term) => ({
+    type: UPDATE_NEWS,
+    payload: term,
+});
+
 export const getNews = (categoryInfo) => {
-    console.log(categoryInfo);
+    // console.log(categoryInfo);
     return async (dispatch) => {
         dispatch(clearNews());
 
@@ -40,11 +46,17 @@ export const getNews = (categoryInfo) => {
                     throw Error(response.statusText);
                 }
 
-                dispatch(isLoading(false));
                 return response;
             })
             .then((response) => response.json())
-            .then((articles) => dispatch(loadingSuccess(articles)))
+            .then((articles) => {
+                if (articles.length > 0) {
+                    dispatch(loadingSuccess(articles));
+                } else {
+                    throw Error("no se han encontrado articulos");
+                }
+                dispatch(isLoading(false));
+            })
             .catch(() => dispatch(loadingError(true)));
     };
 };

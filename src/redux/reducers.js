@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 const loadingError = (state = false, action) => {
-    console.log(action);
+    // console.log(action);
     switch (action.type) {
         case "LOADING_ERROR":
             return action.payload;
@@ -11,7 +11,7 @@ const loadingError = (state = false, action) => {
 };
 
 const loadingInProgress = (state = false, action) => {
-    console.log(action);
+    // console.log(action);
     switch (action.type) {
         case "LOADING_IN_PROGRESS":
             return action.payload;

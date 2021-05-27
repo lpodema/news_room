@@ -1,15 +1,29 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-const SearchMenu = ({ onGet, onClear, isLoading, hasError }) => {
+const SearchMenu = ({
+    onGet,
+    onClear,
+    isLoading,
+    loadingError,
+    handleChangeInput,
+}) => {
     let input;
 
-    const onClickHandler = async (value, history) => {
+    const onClickHandler = (value, history) => {
         onClear();
-        onGet(`search/${value}`);
-        if (!isLoading && !hasError) {
-            console.log(isLoading, hasError);
-            history.push("/search/");
+        // onGet(`search/${value}`);
+        // if (!isLoading && !loadingError) {
+        //     console.log(isLoading, loadingError);
+        // history.replace(`/`);
+        history.push(`/search/${value}`);
+        // }
+    };
+
+    const onEnterHandler = (event, history) => {
+        console.log(event);
+        if (event.code === "Enter") {
+            onClickHandler(input.value, history);
         }
     };
 
@@ -21,15 +35,21 @@ const SearchMenu = ({ onGet, onClear, isLoading, hasError }) => {
         </button>
     ));
 
+    const Input = withRouter(({ history }) => (
+        <input
+            type='text'
+            placeholder='buscar palabras clave'
+            defaultValue={null}
+            ref={(node) => (input = node)}
+            onKeyPress={(e) => onEnterHandler(e, history)}
+        />
+    ));
+    // console.log(handleChangeInput);
+
     return (
         <div>
             <Button />
-            <input
-                type='text'
-                placeholder='buscar palabras clave'
-                defaultValue={null}
-                ref={(node) => (input = node)}
-            />
+            <Input />
         </div>
     );
 };

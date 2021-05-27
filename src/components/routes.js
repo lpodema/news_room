@@ -14,41 +14,34 @@ const routes = [
     {
         path: "",
         exact: true,
-        // main: () => <h2>Home</h2>,
         routing: { category: `/latest/${today}` },
     },
     {
-        path: "Politica",
-        // main: () => <h2>Politica</h2>,
+        path: "politica",
         routing: { category: "news/category/1" },
     },
     {
-        path: "Internacionales",
-        // main: () => <h2>Internacionales</h2>,
+        path: "internacionales",
         routing: { category: "news/category/2" },
     },
     {
-        path: "Tecnologia",
-        // main: () => <h2>tecnologia</h2>,
+        path: "tecnologia",
         routing: { category: "news/category/3" },
     },
     {
-        path: "Espectaculos",
-        // main: () => <h2>espectaculos</h2>,
+        path: "espectaculos",
         routing: { category: "news/category/4" },
     },
     {
-        path: "Deportes",
-        // main: () => <h2>deportes</h2>,
+        path: "deportes",
         routing: { category: "news/category/5" },
     },
     {
-        path: "Diseño",
-        // main: () => <h2>diseño</h2>,
+        path: "diseño",
         routing: { category: "news/category/6" },
     },
     // {
-    //     path: "/search/",
+    //     path: "busqueda",
     //     //     // main: () => <h2>diseño</h2>,
     //     routing: { category: "search/" },
     // },
