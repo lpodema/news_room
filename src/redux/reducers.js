@@ -20,15 +20,15 @@ const loadingInProgress = (state = false, action) => {
     }
 };
 
-const updateNewsToShow = (state, action) => {
-    console.log(action);
-    switch (action.type) {
-        case "UPDATE_ARTICLES":
-            return action.payload;
-        default:
-            return state;
-    }
-};
+// const updateNewsToShow = (state, action) => {
+//     console.log(action);
+//     switch (action.type) {
+//         case "UPDATE_ARTICLES":
+//             return action.payload;
+//         default:
+//             return state;
+//     }
+// };
 
 const news = (state = [], action) => {
     switch (action.type) {
@@ -46,5 +46,5 @@ export default combineReducers({
     news,
     loadingError,
     loadingInProgress,
-    updateNewsToShow,
+    // updateNewsToShow,
 });
