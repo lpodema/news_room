@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import App from "../App";
-import { getNews, clearNews } from "../actions";
+import { getNews, clearNews } from "../redux/actions";
 
 const mapStateToProps = (state) => ({
-    articles: state.news,
-    hasError: state.loadingError,
-    isLoading: state.loadingInProgress,
+    news: state.news,
+    loadingError: state.loadingError,
+    isLoading: state.isLoading,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

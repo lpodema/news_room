@@ -12,24 +12,40 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            articles: props.articles,
-            articlesToShow: props.articles.slice(0, 12),
-            hasError: props.hasError,
-            isLoading: props.isLoading,
+            news: [],
+            articlesToShow: [],
+            hasError: false,
+            isLoading: true,
             page: 0,
         };
+        this.mounted = true;
     }
 
-    componentWillMount() {
-        // console.log(this.props.url.category);
-        this.props.onGet(this.props.url.category);
+    controller = new AbortController();
+
+    componentDidMount() {
+        console.log(this.props);
+        this.props.onGet(this.props.url.category).then(() => {
+            if (this.mounted) {
+                this.setState({
+                    news: this.props.news,
+                });
+                this.setState({
+                    isLoading: false,
+                });
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
     }
 
     onPaginate = (quantity) => {
         const newPage = this.state.page + quantity;
         this.setState({ page: newPage });
         this.setState({
-            articlesToShow: this.state.articles.slice(
+            articlesToShow: this.state.news.slice(
                 newPage * 12,
                 newPage * 12 + 12
             ),
@@ -37,7 +53,8 @@ class Main extends Component {
     };
 
     render() {
-        const { articles, hasError, isLoading } = this.state;
+        console.log(this.props);
+        const { news, hasError, isLoading } = this.state;
         if (hasError) {
             return (
                 <div className='container'>
@@ -54,11 +71,12 @@ class Main extends Component {
             );
         }
 
-        if (articles) {
-            const { articlesToShow } = this.state;
+        if (news.length > 0) {
+            console.log(news);
+            const newsToShow = this.state.news.slice(0, 12);
             return (
                 <Grilla>
-                    {articlesToShow.map((article) => (
+                    {newsToShow.map((article) => (
                         <Article
                             article={article}
                             key={article.news_id}></Article>
@@ -70,7 +88,7 @@ class Main extends Component {
                     </button>
                     <button
                         onClick={() => this.onPaginate(1)}
-                        disabled={this.state.page * 12 + 12 >= articles.length}>
+                        disabled={this.state.page * 12 + 12 >= news.length}>
                         Pagina Siguiente
                     </button>
                 </Grilla>

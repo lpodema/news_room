@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <ul>
             {routes.map((route) => (
-                <li>
+                <li key={route.path}>
                     <Link to={route.path}>{route.path}</Link>
                 </li>
             ))}

@@ -1,18 +1,30 @@
 import { combineReducers } from "redux";
 
 const loadingError = (state = false, action) => {
+    console.log(action);
     switch (action.type) {
         case "LOADING_ERROR":
-            return action.hasError;
+            return action.payload;
         default:
             return state;
     }
 };
 
 const loadingInProgress = (state = false, action) => {
+    console.log(action);
     switch (action.type) {
         case "LOADING_IN_PROGRESS":
-            return action.isLoading;
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
+const updateNewsToShow = (state, action) => {
+    console.log(action);
+    switch (action.type) {
+        case "UPDATE_ARTICLES":
+            return action.payload;
         default:
             return state;
     }
@@ -21,7 +33,8 @@ const loadingInProgress = (state = false, action) => {
 const news = (state = [], action) => {
     switch (action.type) {
         case "LOADING_SUCCESS":
-            return action.articles;
+            console.log("loading success");
+            return action.payload;
         case "CLEAR_NEWS":
             return [];
         default:
@@ -33,4 +46,5 @@ export default combineReducers({
     news,
     loadingError,
     loadingInProgress,
+    updateNewsToShow,
 });

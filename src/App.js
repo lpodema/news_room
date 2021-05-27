@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/header";
-import Articles from "./containers/articles";
+import Articles from "./containers/mainContainer";
 import routes from "./components/routes";
 import { Switch, Route } from "react-router-dom";
 

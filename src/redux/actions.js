@@ -1,40 +1,46 @@
 import { BASE_URL } from "../constants";
+import {
+    LOADING_ERROR,
+    LOADING_IN_PROGRESS,
+    LOADING_SUCCESS,
+    CLEAR_NEWS,
+} from "../redux/actionTypes";
 
 export const loadingError = (bool) => ({
-    type: "LOADING_ERROR",
-    hasError: bool,
+    type: LOADING_ERROR,
+    payload: bool,
 });
 
-export const loadingInProgress = (bool) => ({
-    type: "LOADING_IN_PROGRESS",
-    isLoading: bool,
+export const isLoading = (bool) => ({
+    type: LOADING_IN_PROGRESS,
+    payload: bool,
 });
 
 export const loadingSuccess = (articles) => ({
-    type: "LOADING_SUCCESS",
-    articles,
+    type: LOADING_SUCCESS,
+    payload: articles,
 });
 
 export const clearNews = () => ({
-    type: "CLEAR_NEWS",
+    type: CLEAR_NEWS,
 });
 
 export const getNews = (categoryInfo) => {
     console.log(categoryInfo);
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(clearNews());
 
         dispatch(loadingError(false));
 
-        dispatch(loadingInProgress(true));
+        dispatch(isLoading(true));
 
-        fetch(`${BASE_URL}${categoryInfo}`)
+        await fetch(`${BASE_URL}${categoryInfo}`)
             .then((response) => {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
 
-                dispatch(loadingInProgress(false));
+                dispatch(isLoading(false));
                 return response;
             })
             .then((response) => response.json())
