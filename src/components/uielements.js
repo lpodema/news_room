@@ -8,7 +8,7 @@ const IsLoadingComponentStyling = styled.div`
 export const IsLoadingComponent = () => {
     return (
         <IsLoadingComponentStyling>
-            <h4>Cargando...</h4>
+            <h4>Cargando Noticias...</h4>
             <CircularProgress />
         </IsLoadingComponentStyling>
     );

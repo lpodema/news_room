@@ -1,39 +1,76 @@
 import React from "react";
-import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import { Button } from "@material-ui/core";
 
-const IMG = styled.img`
-    height: auto;
-    max-width: 100%;
-`;
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        // padding: theme.spacing(2),
+        margin: "auto",
+        maxWidth: 500,
+    },
+    image: {
+        maxWidth: "100%",
+        maxHeight: "100%",
+    },
+    img: {
+        // margin: "auto",
+        display: "block",
+        maxWidth: "100%",
+        maxHeight: "100%",
+    },
+}));
 
-const NewsContainer = styled.div`
-    /* padding: 2rem; */
-    height: auto;
-    margin: 0 1rem;
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-`;
+const Article = (article) => {
+    const classes = useStyles();
 
-const article = (article) => {
     const news = article.article;
     return (
-        <NewsContainer>
-            <IMG src={news.img_url}></IMG>
-            <div>
-                <p>
-                    {news.title.length > 50
-                        ? news.title.slice(0, 50).concat("...")
-                        : news.title}{" "}
-                </p>
-                <p>{news.source_name}</p>
-                <input
-                    type='button'
-                    onClick={() => window.open(news.url)}
-                    value='Ver más'
-                />
-            </div>
-        </NewsContainer>
+        <div className={classes.root}>
+            <Paper className={classes.paper}>
+                <Grid container spacing={2} direction='column'>
+                    <Grid item>
+                        <ButtonBase className={classes.image}>
+                            <img
+                                className={classes.img}
+                                alt='complex'
+                                src={news.img_url}
+                            />
+                        </ButtonBase>
+                    </Grid>
+                    <Grid item xs={12} sm container>
+                        <Grid item xs spacing={2}>
+                            <Grid item xs>
+                                <Typography gutterBottom variant='h5'>
+                                    {news.source_name}
+                                </Typography>
+                                <Typography variant='body1' gutterBottom>
+                                    {news.title}
+                                </Typography>
+                            </Grid>
+                            <Grid container direction='row-reverse'>
+                                <Grid item xs={12}>
+                                    <Button
+                                        type='button'
+                                        onClick={() => window.open(news.url)}
+                                        color='primary'
+                                        variant='outlined'>
+                                        Ver más
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Paper>
+        </div>
     );
 };
 
-export default article;
+export default Article;

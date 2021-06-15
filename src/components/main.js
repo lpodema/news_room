@@ -2,19 +2,15 @@ import React, { Component } from "react";
 import Article from "./article";
 import styled from "styled-components";
 import { ErrorComponent, IsLoadingComponent } from "./uielements";
-
-const Grilla = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    /* grid-template-rows: 1fr 1fr 1fr; */
-`;
+import { Button, Grid } from "@material-ui/core";
+import Pagination from "@material-ui/lab/Pagination";
 
 class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
             newsToShow: [],
-            page: 0,
+            page: 1,
         };
         this.mounted = true;
     }
@@ -34,16 +30,13 @@ class Main extends Component {
         this.mounted = false;
     }
 
-    onPaginate = (quantity) => {
-        const newPage = this.state.page + quantity;
-        this.setState({ page: newPage });
-        this.setState({
-            newsToShow: this.state.news.slice(newPage * 12, newPage * 12 + 12),
-        });
+    onPaginate = (event, value) => {
+        this.setState({ page: value });
     };
 
     render() {
         const { news, loadingError, isLoading } = this.props;
+        const page = this.state.page;
         if (loadingError) {
             return (
                 <ErrorComponent
@@ -61,25 +54,22 @@ class Main extends Component {
         }
 
         if (news.length > 0) {
-            const newsToShow = news.slice(0, 12);
+            const newsToShow = news.slice((page - 1) * 12, page * 12);
             return (
-                <Grilla>
+                <Grid container spacing={3}>
                     {newsToShow.map((article) => (
-                        <Article
-                            article={article}
-                            key={article.news_id}></Article>
+                        <Grid item xs={12} sm={4} key={article.news_id}>
+                            <Article article={article}></Article>
+                        </Grid>
                     ))}
-                    <button
-                        onClick={() => this.onPaginate(-1)}
-                        disabled={this.state.page === 0}>
-                        Pagina Anterior
-                    </button>
-                    <button
-                        onClick={() => this.onPaginate(1)}
-                        disabled={this.state.page * 12 + 12 >= news.length}>
-                        Pagina Siguiente
-                    </button>
-                </Grilla>
+                    <Pagination
+                        count={Math.ceil(news.length / 12)}
+                        color='primary'
+                        showFirstButton
+                        showLastButton
+                        page={page}
+                        onChange={this.onPaginate}></Pagination>
+                </Grid>
             );
         }
     }
