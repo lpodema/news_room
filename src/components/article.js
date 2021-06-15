@@ -18,8 +18,6 @@ const article = (article) => {
     const news = article.article;
     return (
         <NewsContainer>
-            {/* <p>{news.news_id}</p>
-            <p>{news.url}</p> */}
             <IMG src={news.img_url}></IMG>
             <div>
                 <p>
@@ -28,8 +26,6 @@ const article = (article) => {
                         : news.title}{" "}
                 </p>
                 <p>{news.source_name}</p>
-                {/* <p>{news.date}</p> */}
-                {/* <p>{news.category}</p> */}
                 <input
                     type='button'
                     onClick={() => window.open(news.url)}

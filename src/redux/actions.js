@@ -32,20 +32,15 @@ export const searchTerm = (term) => ({
 });
 
 export const getNews = (categoryInfo) => {
-    // console.log(categoryInfo);
     return async (dispatch) => {
-        dispatch(clearNews());
-
-        dispatch(loadingError(false));
-
         dispatch(isLoading(true));
+        dispatch(loadingError(false));
 
         await fetch(`${BASE_URL}${categoryInfo}`)
             .then((response) => {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-
                 return response;
             })
             .then((response) => response.json())

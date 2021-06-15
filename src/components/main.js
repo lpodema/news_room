@@ -13,83 +13,24 @@ class Main extends Component {
         console.log("llamado al constructor,");
         super(props);
         this.state = {
-            news: [],
             newsToShow: [],
-            loadingError: false,
-            isLoading: true,
             page: 0,
         };
         this.mounted = true;
-        // this.url = "";
     }
 
-    // controller = new AbortController();
-
     componentDidMount() {
-        console.log("Se montó", this.props);
-
         let params;
-
         if (this.props.url) {
             params = this.props.url.category;
         } else {
             params = `search/${this.props.term}`;
         }
-        console.log(params);
-        this.props.onGet(params).then(() => {
-            if (this.mounted) {
-                this.setState({
-                    news: this.props.news,
-                });
-                this.setState({
-                    isLoading: false,
-                });
-                this.setState({
-                    loadingError: this.props.loadingError,
-                });
-                // this.setState({
-                //     url: this.props.url.category,
-                // });
-            }
-        });
+        this.props.onGet(params)
     }
 
-    /*
-    componentDidUpdate(prevProps) {
-        console.log(prevProps.url.category !== this.props.url.category);
-        if (this.props.url.category !== prevProps.url.category) {
-            console.log("did update");
-            this.props.onGet(this.props.url.category).then(() => {
-                if (this.mounted) {
-                    this.setState({
-                        news: this.props.news,
-                    });
-                    this.setState({
-                        isLoading: false,
-                    });
-                    this.setState({
-                        loadingError: this.props.loadingError,
-                    });
-                    // this.setState({
-                    //     url: this.props.url.category,
-                    // });
-                }
-            });
-        }
-    }
-*/
-
-    // componentWillReceiveProps(prevProps, prevState, snapshot) {
-    //     console.log("entro al metodo");
-    //     if (this.props.news !== prevProps.news) {
-    //         console.log("recibio otras props");
-    //         this.setState({
-    //             news: this.props.news,
-    //         });
-    //     }
-    // }
     componentWillUnmount() {
-        this.setState({ isLoading: true });
+        this.props.onClear()
         this.mounted = false;
     }
 
@@ -102,8 +43,8 @@ class Main extends Component {
     };
 
     render() {
-        // console.log(this.props);
-        const { news, loadingError, isLoading } = this.state;
+        const { news, loadingError, isLoading } = this.props;
+        
         if (loadingError) {
             return (
                 <div className='container'>
@@ -121,8 +62,7 @@ class Main extends Component {
         }
 
         if (news.length > 0) {
-            // console.log(news);
-            const newsToShow = this.state.news.slice(0, 12);
+            const newsToShow = news.slice(0, 12);
             return (
                 <Grilla>
                     {newsToShow.map((article) => (

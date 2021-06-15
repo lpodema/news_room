@@ -4,24 +4,16 @@ import { withRouter } from "react-router-dom";
 const SearchMenu = ({
     onGet,
     onClear,
-    isLoading,
-    loadingError,
-    handleChangeInput,
 }) => {
     let input;
 
-    const onClickHandler = (value, history) => {
+    const onClickHandler = async (value, history) => {
         onClear();
-        // onGet(`search/${value}`);
-        // if (!isLoading && !loadingError) {
-        //     console.log(isLoading, loadingError);
-        // history.replace(`/`);
+        await onGet(`search/${value}`);
         history.push(`/search/${value}`);
-        // }
     };
 
     const onEnterHandler = (event, history) => {
-        console.log(event);
         if (event.code === "Enter") {
             onClickHandler(input.value, history);
         }
@@ -44,7 +36,6 @@ const SearchMenu = ({
             onKeyPress={(e) => onEnterHandler(e, history)}
         />
     ));
-    // console.log(handleChangeInput);
 
     return (
         <div>

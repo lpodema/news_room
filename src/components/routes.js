@@ -40,11 +40,7 @@ const routes = [
         path: "diseño",
         routing: { category: "news/category/6" },
     },
-    // {
-    //     path: "busqueda",
-    //     //     // main: () => <h2>diseño</h2>,
-    //     routing: { category: "search/" },
-    // },
+
 ];
 
 export default routes;
