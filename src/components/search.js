@@ -55,7 +55,10 @@ class Search extends React.Component {
                     handleKeyPress={this.handleKeyPress}
                     history={this.props.history}
                 />
-                <Button variant='contained' onClick={this.handleSubmit}>
+                <Button
+                    variant='contained'
+                    onClick={this.handleSubmit}
+                    color='primary'>
                     Buscar
                 </Button>
             </>
