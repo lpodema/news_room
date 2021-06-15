@@ -1,4 +1,4 @@
-import { PuffLoader } from "react-spinners";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import styled from "styled-components";
 
 const IsLoadingComponentStyling = styled.div`
@@ -9,7 +9,7 @@ export const IsLoadingComponent = () => {
     return (
         <IsLoadingComponentStyling>
             <h4>Cargando...</h4>
-            <PuffLoader color={"#000000"} loading={true} size={200} />
+            <CircularProgress />
         </IsLoadingComponentStyling>
     );
 };

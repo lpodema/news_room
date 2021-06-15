@@ -1,45 +1,67 @@
+import { TextField } from "@material-ui/core";
 import React from "react";
 import { withRouter } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
-const SearchMenu = ({ onGet, onClear }) => {
-    let input;
+const Input = (props) => (
+    <TextField
+        id='outlined-search'
+        label='Buscar palabras clave'
+        type='search'
+        variant='outlined'
+        value={props.value}
+        onKeyDown={(e) => props.handleKeyPress(e)}
+        onChange={(e) => {
+            props.onChange(e);
+        }}
+    />
+);
 
-    const onClickHandler = async (value, history) => {
-        onClear();
-        await onGet(`search/${value}`);
-        history.push(`/search/${value}`);
+class Search extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { value: "" };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+    }
+    history = this.props.history;
+
+    handleSubmit = async () => {
+        this.props.onClear();
+        await this.props.onGet(`search/${this.state.value}`);
+        this.history.push(`/search/${this.state.value}`);
     };
 
-    const onEnterHandler = (event, history) => {
-        if (event.code === "Enter") {
-            onClickHandler(input.value, history);
+    handleChange = (event) => {
+        this.setState({ value: event.target.value });
+        if (event.key === "Enter") {
+            this.handleSubmit();
         }
     };
 
-    const Button = withRouter(({ history }) => (
-        <button
-            type='button'
-            onClick={() => onClickHandler(input.value, history)}>
-            Buscar
-        </button>
-    ));
+    handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            this.handleSubmit();
+        }
+    };
 
-    const Input = withRouter(({ history }) => (
-        <input
-            type='text'
-            placeholder='buscar palabras clave'
-            defaultValue={null}
-            ref={(node) => (input = node)}
-            onKeyPress={(e) => onEnterHandler(e, history)}
-        />
-    ));
+    render() {
+        return (
+            <>
+                <Input
+                    onChange={this.handleChange}
+                    value={this.state.value}
+                    handleKeyPress={this.handleKeyPress}
+                    history={this.props.history}
+                />
+                <Button variant='contained' onClick={this.handleSubmit}>
+                    Buscar
+                </Button>
+            </>
+        );
+    }
+}
 
-    return (
-        <div>
-            <Button />
-            <Input />
-        </div>
-    );
-};
-
+const SearchMenu = withRouter(Search);
 export default SearchMenu;
