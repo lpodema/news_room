@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Article from "./article";
 import styled from "styled-components";
+import { ErrorComponent, IsLoadingComponent } from "./uielements";
 
 const Grilla = styled.div`
     display: grid;
@@ -10,7 +11,6 @@ const Grilla = styled.div`
 
 class Main extends Component {
     constructor(props) {
-        console.log("llamado al constructor,");
         super(props);
         this.state = {
             newsToShow: [],
@@ -26,11 +26,11 @@ class Main extends Component {
         } else {
             params = `search/${this.props.term}`;
         }
-        this.props.onGet(params)
+        this.props.onGet(params);
     }
 
     componentWillUnmount() {
-        this.props.onClear()
+        this.props.onClear();
         this.mounted = false;
     }
 
@@ -44,21 +44,20 @@ class Main extends Component {
 
     render() {
         const { news, loadingError, isLoading } = this.props;
-        
         if (loadingError) {
             return (
-                <div className='container'>
-                    <h6>Error al buscar los repos.</h6>
-                </div>
+                <ErrorComponent
+                    search={
+                        this.props.term
+                            ? this.props.term
+                            : this.props.url.category
+                    }
+                />
             );
         }
 
         if (isLoading) {
-            return (
-                <div className='container'>
-                    <h6>Loading…</h6>
-                </div>
-            );
+            return <IsLoadingComponent />;
         }
 
         if (news.length > 0) {

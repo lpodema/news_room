@@ -1,10 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-const SearchMenu = ({
-    onGet,
-    onClear,
-}) => {
+const SearchMenu = ({ onGet, onClear }) => {
     let input;
 
     const onClickHandler = async (value, history) => {

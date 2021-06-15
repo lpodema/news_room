@@ -15,7 +15,7 @@ const loadingError = (state = false, action) => {
     }
 };
 
-const isLoading = (state = false, action) => {
+const isLoading = (state = true, action) => {
     switch (action.type) {
         case LOADING_IN_PROGRESS:
             return action.payload;

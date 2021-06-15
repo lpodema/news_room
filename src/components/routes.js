@@ -17,30 +17,29 @@ const routes = [
         routing: { category: `/latest/${today}` },
     },
     {
-        path: "politica",
+        path: "Politica",
         routing: { category: "news/category/1" },
     },
     {
-        path: "internacionales",
+        path: "Internacionales",
         routing: { category: "news/category/2" },
     },
     {
-        path: "tecnologia",
+        path: "Tecnologia",
         routing: { category: "news/category/3" },
     },
     {
-        path: "espectaculos",
+        path: "Espectaculos",
         routing: { category: "news/category/4" },
     },
     {
-        path: "deportes",
+        path: "Deportes",
         routing: { category: "news/category/5" },
     },
     {
-        path: "diseño",
+        path: "Diseño",
         routing: { category: "news/category/6" },
     },
-
 ];
 
 export default routes;
