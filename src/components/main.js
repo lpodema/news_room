@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import Article from "./article";
-import styled from "styled-components";
 import { ErrorComponent, IsLoadingComponent } from "./uielements";
-import { Button, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 
 class Main extends Component {

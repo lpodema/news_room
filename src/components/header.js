@@ -7,11 +7,17 @@ import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { TextField } from "@material-ui/core";
-import styled from "styled-components";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
+    },
+});
+
+const styledHeader = makeStyles({
+    root: {
+        height: 120,
     },
 });
 
@@ -44,18 +50,28 @@ const MenuTabs = (props) => {
 };
 
 const Header = (props) => {
+    const classes = styledHeader();
     return (
-        <>
-            <TextField
-                id='outlined-search'
-                label='Busqueda'
-                type='search'
-                variant='outlined'
-                component={Search}
-                handleChangeInput={props.handleChangeInput}
-            />
+        <Grid
+            container
+            xs={12}
+            direction='row'
+            justify='flex-end'
+            alignItems='center'
+            alignContent='flex-end'
+            className={classes.root}>
+            <Grid item>
+                <TextField
+                    id='outlined-search'
+                    label='Busqueda'
+                    type='search'
+                    variant='outlined'
+                    component={Search}
+                    handleChangeInput={props.handleChangeInput}
+                />
+            </Grid>
             <MenuTabs props={props} />
-        </>
+        </Grid>
     );
 };
 

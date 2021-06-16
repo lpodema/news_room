@@ -2,13 +2,15 @@ import { TextField } from "@material-ui/core";
 import React from "react";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import { Grid } from "@material-ui/core";
 
 const Input = (props) => (
     <TextField
         id='outlined-search'
         label='Buscar palabras clave'
-        type='search'
+        type='text'
         variant='outlined'
+        size='small'
         value={props.value}
         onKeyDown={(e) => props.handleKeyPress(e)}
         onChange={(e) => {
@@ -28,9 +30,13 @@ class Search extends React.Component {
     history = this.props.history;
 
     handleSubmit = async () => {
-        this.props.onClear();
-        await this.props.onGet(`search/${this.state.value}`);
-        this.history.push(`/search/${this.state.value}`);
+        if (this.state.value !== "") {
+            this.props.onClear();
+            await this.props.onGet(`search/${this.state.value}`);
+            this.history.push(`/search/${this.state.value}`);
+        } else {
+            this.history.push(`/`);
+        }
     };
 
     handleChange = (event) => {
@@ -48,20 +54,25 @@ class Search extends React.Component {
 
     render() {
         return (
-            <>
-                <Input
-                    onChange={this.handleChange}
-                    value={this.state.value}
-                    handleKeyPress={this.handleKeyPress}
-                    history={this.props.history}
-                />
-                <Button
-                    variant='contained'
-                    onClick={this.handleSubmit}
-                    color='primary'>
-                    Buscar
-                </Button>
-            </>
+            <Grid container direction='row' lg={12} alignItems='stretch'>
+                <Grid item>
+                    <Input
+                        onChange={this.handleChange}
+                        value={this.state.value}
+                        handleKeyPress={this.handleKeyPress}
+                        history={this.props.history}
+                    />
+                </Grid>
+                <Grid item>
+                    <Button
+                        variant='contained'
+                        onClick={this.handleSubmit}
+                        color='primary'
+                        fullWidth={true}>
+                        Buscar
+                    </Button>
+                </Grid>
+            </Grid>
         );
     }
 }
