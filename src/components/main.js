@@ -21,6 +21,15 @@ class Main extends Component {
         } else {
             params = `search/${this.props.term}`;
         }
+        if (params.includes("latest")) {
+            this.props.onChangeTab(0);
+        } else {
+            if (params.includes("category")) {
+                this.props.onChangeTab(parseInt(params[params.length - 1]));
+            } else {
+                this.props.onChangeTab(7);
+            }
+        }
         this.props.onGet(params);
     }
 

@@ -1,9 +1,12 @@
 import { connect } from "react-redux";
 import Header from "../components/header.js";
-import { getNews, clearNews } from "../redux/actions";
+import { changeTab } from "../redux/actions";
+
+const mapStateToProps = (state) => ({
+    tab: state.changeTab,
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onGet: (url_params) => dispatch(getNews(url_params)),
-    onClear: () => dispatch(clearNews()),
+    onChangeTab: (value) => dispatch(changeTab(value)),
 });
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

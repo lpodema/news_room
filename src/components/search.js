@@ -33,9 +33,11 @@ class Search extends React.Component {
         if (this.state.value !== "") {
             this.props.onClear();
             await this.props.onGet(`search/${this.state.value}`);
+            this.props.onChangeTab(7);
             this.history.push(`/search/${this.state.value}`);
         } else {
             this.history.push(`/`);
+            this.props.onChangeTab(0);
         }
     };
 
@@ -54,7 +56,7 @@ class Search extends React.Component {
 
     render() {
         return (
-            <Grid container direction='row' lg={12} alignItems='stretch'>
+            <Grid container direction='row' alignItems='stretch'>
                 <Grid item>
                     <Input
                         onChange={this.handleChange}

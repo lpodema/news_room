@@ -5,6 +5,7 @@ import {
     LOADING_SUCCESS,
     CLEAR_NEWS,
     UPDATE_NEWS,
+    CHANGE_TAB,
 } from "../redux/actionTypes";
 
 export const loadingError = (bool) => ({
@@ -29,6 +30,11 @@ export const clearNews = () => ({
 export const searchTerm = (term) => ({
     type: UPDATE_NEWS,
     payload: term,
+});
+
+export const changeTab = (value) => ({
+    type: CHANGE_TAB,
+    payload: value,
 });
 
 export const getNews = (categoryInfo) => {

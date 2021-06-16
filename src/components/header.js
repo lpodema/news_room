@@ -9,25 +9,15 @@ import Tab from "@material-ui/core/Tab";
 import { AppBar, TextField } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles({
-    root: {
-        flexGrow: 1,
-    },
-});
-
 const styledHeader = makeStyles({
     root: {
         height: 120,
-        alignItems: "flex-end",
     },
 });
 
 const MenuTabs = (props) => {
-    const classes = useStyles();
-    const [value, setValue] = React.useState(0);
-
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        props.onChangeTab(newValue);
     };
 
     return (
@@ -35,7 +25,7 @@ const MenuTabs = (props) => {
             <Paper elevation={3}>
                 <Grid container justify='space-around'>
                     <Tabs
-                        value={value}
+                        value={props.tab}
                         onChange={handleChange}
                         indicatorColor='primary'
                         textColor='primary'
@@ -48,6 +38,7 @@ const MenuTabs = (props) => {
                                 component={Link}
                                 to={`/${route.path}`}></Tab>
                         ))}
+                        <Tab label='Busqueda' disabled={props.tab !== 7}></Tab>
                     </Tabs>
                 </Grid>
             </Paper>
@@ -60,12 +51,12 @@ const Header = (props) => {
     return (
         <Grid
             container
-            xs={12}
             direction='row'
             justify='flex-end'
-            alignItems='center'
+            alignItems='flex-end'
             alignContent='flex-end'
-            className={classes.root}>
+            className={classes.root}
+            height={120}>
             <Grid item>
                 <TextField
                     id='outlined-search'
@@ -76,7 +67,7 @@ const Header = (props) => {
                     handleChangeInput={props.handleChangeInput}
                 />
             </Grid>
-            <MenuTabs props={props} />
+            <MenuTabs {...props} />
         </Grid>
     );
 };

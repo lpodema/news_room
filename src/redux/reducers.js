@@ -4,6 +4,7 @@ import {
     LOADING_IN_PROGRESS,
     LOADING_SUCCESS,
     CLEAR_NEWS,
+    CHANGE_TAB,
 } from "../redux/actionTypes";
 
 const loadingError = (state = false, action) => {
@@ -35,8 +36,18 @@ const news = (state = [], action) => {
     }
 };
 
+const changeTab = (state = 0, action) => {
+    switch (action.type) {
+        case CHANGE_TAB:
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     news,
     loadingError,
     isLoading,
+    changeTab,
 });

@@ -1,5 +1,5 @@
 import "./App.css";
-import Header from "./components/header";
+import Header from "./containers/headerMenu";
 import Articles from "./containers/mainContainer";
 import routes from "./components/routes";
 import { Switch, Route } from "react-router-dom";
@@ -9,7 +9,7 @@ function App() {
     return (
         <Container maxWidth='lg'>
             <Grid container spacing={3}>
-                <Grid container xs={12}>
+                <Grid container>
                     <Header />
                 </Grid>
                 <Grid item xs={12}>
