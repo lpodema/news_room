@@ -1,4 +1,3 @@
-import "./App.css";
 import Header from "./containers/headerMenu";
 import Articles from "./containers/mainContainer";
 import routes from "./components/routes";

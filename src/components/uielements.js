@@ -21,8 +21,7 @@ export const ErrorComponent = (props) => {
                 No se han encontrado artículos para {props.search}.
             </Typography>
             <Typography variant='h5' align='center' color='error'>
-                Por favor busca otras noticias o bien reintenta nuevamente más
-                tarde.
+                Revise su búsqueda y reinténtela nuevamente en otro momento.
             </Typography>
         </Paper>
     );

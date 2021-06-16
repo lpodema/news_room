@@ -64,20 +64,28 @@ class Main extends Component {
         if (news.length > 0) {
             const newsToShow = news.slice((page - 1) * 12, page * 12);
             return (
-                <Grid container spacing={3}>
-                    {newsToShow.map((article) => (
-                        <Grid item xs={12} sm={4} key={article.news_id}>
-                            <Article article={article}></Article>
-                        </Grid>
-                    ))}
-                    <Pagination
-                        count={Math.ceil(news.length / 12)}
-                        color='primary'
-                        showFirstButton
-                        showLastButton
-                        page={page}
-                        onChange={this.onPaginate}></Pagination>
-                </Grid>
+                <>
+                    <Grid container spacing={3}>
+                        {newsToShow.map((article) => (
+                            <Grid item xs={12} sm={4} key={article.news_id}>
+                                <Article article={article}></Article>
+                            </Grid>
+                        ))}
+                    </Grid>
+                    <Grid
+                        container
+                        justify='space-evenly'
+                        alignContent='center'>
+                        <Pagination
+                            count={Math.ceil(news.length / 12)}
+                            color='primary'
+                            showFirstButton
+                            showLastButton
+                            page={page}
+                            onChange={this.onPaginate}
+                        />
+                    </Grid>
+                </>
             );
         }
     }
