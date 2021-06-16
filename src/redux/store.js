@@ -16,8 +16,8 @@ const logger = (store) => (next) => (action) => {
 
 const storeFactory = () =>
     compose(
-        applyMiddleware(logger, thunk),
-        window.devToolsExtension && window.devToolsExtension()
+        applyMiddleware(logger, thunk)
+        // window.devToolsExtension && window.devToolsExtension()
     )(createStore)(rootReducer);
 
 export default storeFactory;
