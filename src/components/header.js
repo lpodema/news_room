@@ -11,7 +11,8 @@ import Grid from "@material-ui/core/Grid";
 
 const styledHeader = makeStyles({
     root: {
-        height: 120,
+        height: 100,
+        paddingTop: 110,
     },
 });
 

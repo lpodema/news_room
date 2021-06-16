@@ -75,7 +75,9 @@ class Main extends Component {
                     <Grid
                         container
                         justify='space-evenly'
-                        alignContent='center'>
+                        alignContent='center'
+                        direction='column'
+                        alignItems='stretch'>
                         <Pagination
                             count={Math.ceil(news.length / 12)}
                             color='primary'
