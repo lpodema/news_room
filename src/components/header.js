@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { TextField } from "@material-ui/core";
+import { AppBar, TextField } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 const styledHeader = makeStyles({
     root: {
         height: 120,
+        alignItems: "flex-end",
     },
 });
 
@@ -30,22 +31,27 @@ const MenuTabs = (props) => {
     };
 
     return (
-        <Paper className={classes.root}>
-            <Tabs
-                value={value}
-                onChange={handleChange}
-                indicatorColor='primary'
-                textColor='primary'
-                centered>
-                {routes.map((route) => (
-                    <Tab
-                        key={route.path}
-                        label={route.label}
-                        component={Link}
-                        to={`/${route.path}`}></Tab>
-                ))}
-            </Tabs>
-        </Paper>
+        <AppBar position='fixed'>
+            <Paper elevation={3}>
+                <Grid container justify='space-around'>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor='primary'
+                        textColor='primary'
+                        variant='scrollable'
+                        scrollButtons='auto'>
+                        {routes.map((route) => (
+                            <Tab
+                                key={route.path}
+                                label={route.label}
+                                component={Link}
+                                to={`/${route.path}`}></Tab>
+                        ))}
+                    </Tabs>
+                </Grid>
+            </Paper>
+        </AppBar>
     );
 };
 
